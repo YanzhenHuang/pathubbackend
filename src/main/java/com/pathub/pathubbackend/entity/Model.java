@@ -22,13 +22,10 @@ public class Model {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    private String name;
+    private String modelName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id", nullable = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private User owner;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "model_tags", joinColumns = @JoinColumn(name = "model_id"))
@@ -36,8 +33,22 @@ public class Model {
     @Builder.Default
     private List<String> tags = new ArrayList<>();
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Visibility visibility = Visibility.PRIVATE;
+
     @Column(columnDefinition = "TEXT")
     private String readme;
+
+    @Column(nullable = false)
+    private Long downloads = 0L;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private User author;
 
     @OneToMany(mappedBy = "model", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude

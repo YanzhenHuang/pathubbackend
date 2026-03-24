@@ -26,6 +26,9 @@ public class ModelFile {
     @EqualsAndHashCode.Exclude
     private Model model;
 
+    @Column(name = "model_version")
+    private String modelVersion;
+
     @Column(nullable = false, length = 255)
     private String filename;
 
