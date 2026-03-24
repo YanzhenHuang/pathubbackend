@@ -1,4 +1,4 @@
-package com.pathub.pathubbackend.entity;
+package com.pathub.pathubbackend.entity.enums;
 
 public enum Visibility {
     PUBLIC,

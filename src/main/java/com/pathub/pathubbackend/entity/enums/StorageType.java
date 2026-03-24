@@ -1,4 +1,4 @@
-package com.pathub.pathubbackend.entity;
+package com.pathub.pathubbackend.entity.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,11 +9,31 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum StorageType {
-    LOCAL("Local", "file://", null),
+
+    /**
+     * Native storage, bare file on the linux fs. No OSS.
+     */
+    NATIVE("Local", "file://", null),
+
+    /**
+     * MinIO self-deployment OSS.
+     */
+    MINIO("MinIO", "minio://", null),
+
+    /**
+     * Aliyun OSS commercial service.
+     */
     ALIYUN_OSS("AliyunOSS", "oss://", "oss-%s.aliyuncs.com"),
+
+    /**
+     * Tencent COS commercial service.
+     */
     TENCENT_COS("TencentCOS", "", "cos.%s.myqcloud.com"),
-    AWS_S3("AWSS3", "s3://", "s3.%s.amazonaws.com"),
-    MINIO("MinIO", "minio://", null);
+
+    /**
+     * AWS S3 commercial service.
+     */
+    AWS_S3("AWSS3", "s3://", "s3.%s.amazonaws.com");
 
     private final String description;
     private final String scheme;            // The starting point of URI
